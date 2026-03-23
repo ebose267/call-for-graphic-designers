@@ -2,407 +2,413 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080810">
 <title>Call for Designers — IEEE UNIBEN</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #00629B;
+    --blue-dim: rgba(0,98,155,0.15);
+    --blue-border: rgba(0,98,155,0.45);
+    --amber: rgba(255,165,0,0.85);
+    --amber-dim: rgba(255,165,0,0.09);
+    --amber-border: rgba(255,165,0,0.35);
+    --bg: #080810;
+    --surface2: rgba(255,255,255,0.035);
+    --border: rgba(255,255,255,0.08);
+    --text: #ffffff;
+    --text-muted: rgba(255,255,255,0.52);
+    --text-dim: rgba(255,255,255,0.24);
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
   body {
-    background: #0a0a12;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 40px 20px;
+    background: var(--bg);
+    color: var(--text);
     font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    padding-bottom: 88px;
   }
 
-  .flyer {
-    width: 680px;
-    min-height: 960px;
-    background: #0d0d1a;
-    border: 1px solid #1e2040;
-    position: relative;
-    overflow: hidden;
-    padding: 56px 52px 52px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Circuit grid background */
-  .grid-bg {
-    position: absolute;
-    inset: 0;
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
     background-image:
-      linear-gradient(rgba(0, 98, 155, 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 98, 155, 0.07) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: 0;
+      linear-gradient(rgba(0,98,155,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,98,155,0.05) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none; z-index: 0;
   }
 
-  /* Corner accent blobs */
-  .blob-tl {
-    position: absolute;
-    top: -80px;
-    left: -80px;
-    width: 340px;
-    height: 340px;
-    background: radial-gradient(circle, rgba(0, 98, 155, 0.25) 0%, transparent 70%);
-    z-index: 0;
+  .blob { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(60px); }
+  .blob-1 { width: 320px; height: 320px; top: -100px; left: -100px; background: radial-gradient(circle, rgba(0,98,155,0.2) 0%, transparent 70%); }
+  .blob-2 { width: 360px; height: 360px; bottom: -120px; right: -120px; background: radial-gradient(circle, rgba(255,140,0,0.12) 0%, transparent 70%); }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 0 auto;
+    padding: 48px 20px 32px;
   }
 
-  .blob-br {
-    position: absolute;
-    bottom: -100px;
-    right: -80px;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255, 165, 0, 0.12) 0%, transparent 65%);
-    z-index: 0;
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-
-  /* Decorative horizontal rule */
-  .rule-accent {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, #00629B 0%, rgba(0,98,155,0.1) 100%);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Content */
-  .content { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; }
+  .fade { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+  .fade-1 { animation-delay: 0.05s; } .fade-2 { animation-delay: 0.12s; }
+  .fade-3 { animation-delay: 0.22s; } .fade-4 { animation-delay: 0.32s; }
+  .fade-5 { animation-delay: 0.42s; } .fade-6 { animation-delay: 0.52s; }
 
   /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-
-  .ieee-badge {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
+  .site-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 52px; gap: 12px; }
+  .ieee-badge { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .ieee-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #00629B;
+    width: 8px; height: 8px; flex-shrink: 0;
+    border-radius: 50%; background: var(--blue);
+    animation: pulse 2.5s ease-in-out infinite;
   }
-
-  .ieee-label {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #00629B;
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,98,155,0.5); }
+    50%      { box-shadow: 0 0 0 5px rgba(0,98,155,0); }
   }
+  .ieee-label { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .year-tag { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; flex-shrink: 0; }
 
-  .year-tag {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.25);
-    font-weight: 400;
-  }
+  /* Hero */
+  .tag-line { font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(44px, 11vw, 72px); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 6px; }
+  h1 .blue { color: var(--blue); }
+  .h1-ghost { font-family: 'Syne', sans-serif; font-size: clamp(44px, 11vw, 72px); font-weight: 800; line-height: 1.0; letter-spacing: -0.02em; color: rgba(255,255,255,0.07); margin-bottom: 32px; }
+  .divider { width: 40px; height: 3px; background: var(--blue); margin-bottom: 24px; border-radius: 2px; }
+  .hero-body { font-size: 15px; line-height: 1.8; color: var(--text-muted); margin-bottom: 36px; }
+  .hero-body strong { color: rgba(255,255,255,0.85); font-weight: 500; }
 
-  /* Tag */
-  .tag-line {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,165,0,0.7);
-    margin-bottom: 18px;
-  }
+  /* Pills */
+  .roles-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .roles { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 56px; }
+  .role-pill { padding: 9px 18px; border-radius: 40px; font-size: 13px; font-weight: 500; }
+  .role-pill.blue  { border: 1px solid var(--blue-border);  background: var(--blue-dim);  color: rgba(120,190,255,0.9); }
+  .role-pill.amber { border: 1px solid var(--amber-border); background: var(--amber-dim); color: rgba(255,200,80,0.9); }
 
-  /* Headline */
-  .headline {
-    font-family: 'Syne', sans-serif;
-    font-size: 66px;
-    font-weight: 800;
-    line-height: 1.0;
-    color: #ffffff;
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-  }
+  /* Section */
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
 
-  .headline span {
-    color: #00629B;
-  }
+  /* Gains — row layout on mobile */
+  .gains { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 56px; }
+  .gain-card { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; }
+  .gain-glyph { font-size: 18px; color: var(--blue); flex-shrink: 0; margin-top: 2px; }
+  .gain-title { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 3px; }
+  .gain-desc  { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 
-  .subheadline {
-    font-family: 'Syne', sans-serif;
-    font-size: 66px;
-    font-weight: 800;
-    line-height: 1.0;
-    color: rgba(255,255,255,0.12);
-    margin-bottom: 36px;
-    letter-spacing: -0.02em;
-  }
+  .hr { width: 100%; height: 1px; background: linear-gradient(90deg, var(--blue-border), transparent); margin-bottom: 44px; }
 
-  /* Divider */
-  .divider {
-    width: 48px;
-    height: 3px;
-    background: #00629B;
-    margin-bottom: 28px;
-  }
+  /* Form */
+  .form-heading { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .form-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
+  .field-group { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .field-group.full { grid-template-columns: 1fr; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
 
-  /* Body copy */
-  .body-copy {
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.55);
-    max-width: 520px;
-    margin-bottom: 44px;
-    font-weight: 300;
-  }
+  label { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+  label .req { color: var(--blue); margin-left: 2px; }
 
-  .body-copy strong {
-    color: rgba(255,255,255,0.85);
-    font-weight: 500;
-  }
-
-  /* Roles */
-  .roles-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-    margin-bottom: 14px;
-  }
-
-  .roles {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-
-  .role-pill {
-    padding: 9px 20px;
-    border: 1px solid rgba(0, 98, 155, 0.5);
-    border-radius: 40px;
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.75);
-    letter-spacing: 0.02em;
-    background: rgba(0, 98, 155, 0.08);
-  }
-
-  .role-pill.accent {
-    border-color: rgba(255, 165, 0, 0.4);
-    background: rgba(255, 165, 0, 0.07);
-    color: rgba(255, 200, 80, 0.85);
-  }
-
-  /* What you gain */
-  .gains {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 52px;
-  }
-
-  .gain-item {
-    padding: 18px 20px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
+  input, select, textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
     border-radius: 10px;
+    font-size: 16px; /* prevents iOS zoom */
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400; color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%; min-height: 52px;
+    padding: 14px 16px;
+    -webkit-appearance: none; appearance: none;
   }
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+  input:focus, select:focus, textarea:focus { border-color: var(--blue); background: rgba(0,98,155,0.08); }
+  input, select, textarea, button { -webkit-tap-highlight-color: transparent; }
 
-  .gain-icon {
-    font-size: 18px;
-    margin-bottom: 8px;
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px;
   }
+  select option { background: #1a1a2e; color: #fff; }
+  textarea { resize: vertical; min-height: 96px; }
 
-  .gain-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 4px;
+  /* Checkbox grid */
+  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .checkbox-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 14px; min-height: 48px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; user-select: none;
+    transition: border-color 0.18s, background 0.18s;
   }
+  .checkbox-item:active { background: rgba(0,98,155,0.1); }
+  .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--blue); padding: 0; margin: 0; cursor: pointer; }
+  .checkbox-item span { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.6); line-height: 1.2; }
+  .checkbox-item.checked { border-color: var(--blue-border); background: var(--blue-dim); }
+  .checkbox-item.checked span { color: rgba(120,190,255,0.9); }
 
-  .gain-desc {
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    line-height: 1.5;
+  /* Status */
+  .status { display: none; margin-top: 20px; padding: 16px 18px; border-radius: 10px; font-size: 14px; line-height: 1.5; }
+  .status.success { display: block; background: rgba(0,155,80,0.1);  border: 1px solid rgba(0,200,100,0.25); color: rgba(100,255,160,0.9); }
+  .status.error   { display: block; background: rgba(200,50,50,0.1); border: 1px solid rgba(255,80,80,0.25);  color: rgba(255,120,120,0.9); }
+
+  /* Sticky CTA */
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    padding: 12px 20px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    background: rgba(8,8,16,0.93);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
   }
+  .sticky-note { font-size: 11px; color: var(--text-dim); line-height: 1.4; flex: 1; }
 
-  /* CTA */
-  .cta-row {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  button[type="submit"] {
+    padding: 0 28px; height: 52px;
+    background: var(--blue); border: none; border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 500; color: #fff;
+    cursor: pointer; letter-spacing: 0.04em;
+    transition: opacity 0.2s, transform 0.12s;
+    white-space: nowrap; flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
   }
-
-  .cta-block { }
-
-  .cta-label {
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.2);
-    margin-bottom: 8px;
-  }
-
-  .cta-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: white;
-  }
-
-  .cta-detail {
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
-    margin-top: 4px;
-  }
-
-  .cta-button {
-    padding: 14px 32px;
-    background: #00629B;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
+  button[type="submit"]:active { transform: scale(0.96); opacity: 0.9; }
+  button[type="submit"]:disabled { opacity: 0.38; cursor: not-allowed; transform: none; }
 
   /* Footer */
-  .footer {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .site-footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .footer-text { font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; }
+  .footer-text strong { color: rgba(255,255,255,0.35); font-weight: 500; }
+  .footer-dots { display: flex; gap: 5px; align-items: center; }
+  .fdot { width: 5px; height: 5px; border-radius: 50%; background: rgba(0,98,155,0.35); }
+  .fdot.on { background: var(--blue); }
 
-  .footer-brand {
-    font-size: 11px;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 0.08em;
-  }
-
-  .footer-brand strong {
-    color: rgba(255,255,255,0.4);
-    font-weight: 500;
-  }
-
-  .footer-dot-row {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .fdot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: rgba(0,98,155,0.5);
-  }
-
-  .fdot.active { background: #00629B; }
-
-  @media print {
-    body { background: white; padding: 0; }
-    .flyer { border: none; }
+  /* Desktop */
+  @media (min-width: 580px) {
+    .page { padding: 64px 32px 40px; }
+    body { padding-bottom: 0; }
+    .gains { grid-template-columns: 1fr 1fr; }
+    .gain-card { flex-direction: column; gap: 0; }
+    .gain-glyph { margin-bottom: 10px; }
+    .field-group { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .checkbox-grid { grid-template-columns: repeat(3, 1fr); }
+    .sticky-cta { position: static; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-top: none; padding: 0; margin-top: 32px; justify-content: space-between; }
+    .sticky-note { font-size: 12px; }
+    button[type="submit"] { padding: 0 36px; }
+    button[type="submit"]:hover { opacity: 0.86; transform: translateY(-1px); }
   }
 </style>
 </head>
 <body>
-<div class="flyer">
-  <div class="grid-bg"></div>
-  <div class="blob-tl"></div>
-  <div class="blob-br"></div>
 
-  <div class="content">
-    <!-- Header -->
-    <div class="header">
-      <div class="ieee-badge">
-        <div class="ieee-dot"></div>
-        <span class="ieee-label">IEEE University of Benin Student Branch</span>
-      </div>
-      <span class="year-tag">2026</span>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="page">
+
+  <header class="site-header fade fade-1">
+    <div class="ieee-badge">
+      <div class="ieee-dot"></div>
+      <span class="ieee-label">IEEE UNIBEN Student Branch</span>
     </div>
+    <span class="year-tag">2026</span>
+  </header>
 
-    <!-- Tag -->
-    <p class="tag-line">Open Creative Collaboration</p>
-
-    <!-- Headline -->
-    <h1 class="headline">We're calling<br>for <span>designers.</span></h1>
-    <h2 class="subheadline">Are you one?</h2>
-
-    <div class="divider"></div>
-
-    <!-- Body -->
-    <p class="body-copy">
-      IEEE UNIBEN is looking for <strong>brand & visual identity designers</strong> and
-      <strong>motion & video designers</strong> to collaborate with one of the University of Benin's
-      most active engineering communities. No rigid contracts — just your craft, applied to
-      work that reaches real people.
+  <section>
+    <p class="tag-line fade fade-2">Open Creative Collaboration</p>
+    <h1 class="fade fade-2">We're calling<br>for <span class="blue">designers.</span></h1>
+    <p class="h1-ghost fade fade-2">Are you one?</p>
+    <div class="divider fade fade-3"></div>
+    <p class="hero-body fade fade-3">
+      IEEE UNIBEN is looking for <strong>brand &amp; visual identity designers</strong> and
+      <strong>motion &amp; video designers</strong> to collaborate with one of the University of Benin's
+      most active engineering communities. No rigid contracts — just your craft, applied to work that reaches real people.
     </p>
-
-    <!-- Roles -->
-    <p class="roles-label">We're looking for</p>
-    <div class="roles">
-      <div class="role-pill">Brand &amp; Visual Identity</div>
-      <div class="role-pill accent">Motion &amp; Video Design</div>
+    <p class="roles-label fade fade-3">We're looking for</p>
+    <div class="roles fade fade-3">
+      <span class="role-pill blue">Brand &amp; Visual Identity</span>
+      <span class="role-pill amber">Motion &amp; Video Design</span>
     </div>
+  </section>
 
-    <!-- Gains -->
+  <section class="fade fade-4">
+    <p class="section-label">What you get</p>
     <div class="gains">
-      <div class="gain-item">
-        <div class="gain-icon">◈</div>
-        <p class="gain-title">Real Portfolio Work</p>
-        <p class="gain-desc">Projects with purpose and an audience that extends beyond the campus.</p>
+      <div class="gain-card">
+        <div class="gain-glyph">◈</div>
+        <div><p class="gain-title">Real Portfolio Work</p><p class="gain-desc">Projects with purpose and an audience that extends beyond campus.</p></div>
       </div>
-      <div class="gain-item">
-        <div class="gain-icon">◉</div>
-        <p class="gain-title">Full Credit &amp; Visibility</p>
-        <p class="gain-desc">Your name and work featured across IEEE UNIBEN's official platforms.</p>
+      <div class="gain-card">
+        <div class="gain-glyph">◉</div>
+        <div><p class="gain-title">Full Credit &amp; Visibility</p><p class="gain-desc">Your name featured across IEEE UNIBEN's official platforms.</p></div>
       </div>
-      <div class="gain-item">
-        <div class="gain-icon">◎</div>
-        <p class="gain-title">Engineering Network</p>
-        <p class="gain-desc">Connect with engineers, tech leaders, and innovators across the branch.</p>
+      <div class="gain-card">
+        <div class="gain-glyph">◎</div>
+        <div><p class="gain-title">Engineering Network</p><p class="gain-desc">Connect with engineers, tech leaders, and innovators.</p></div>
       </div>
-      <div class="gain-item">
-        <div class="gain-icon">◇</div>
-        <p class="gain-title">Flexible Collaboration</p>
-        <p class="gain-desc">Contribute on your own terms — remote-friendly, no rigid commitments.</p>
+      <div class="gain-card">
+        <div class="gain-glyph">◇</div>
+        <div><p class="gain-title">Flexible Collaboration</p><p class="gain-desc">Contribute on your own terms — no rigid commitments.</p></div>
       </div>
     </div>
+  </section>
 
-    <!-- CTA Row -->
-    <div class="cta-row">
-      <div class="cta-block">
-        <p class="cta-label">Reach us</p>
-        <p class="cta-text">Slide in. Let's build.</p>
-        <p class="cta-detail">[your contact / DM / email here]</p>
-      </div>
-      <div class="cta-button">Apply / Connect →</div>
-    </div>
+  <div class="hr fade fade-5"></div>
 
-    <!-- Footer -->
-    <div class="footer">
-      <p class="footer-brand"><strong>IEEE UNIBEN</strong> · University of Benin, Benin City</p>
-      <div class="footer-dot-row">
-        <div class="fdot active"></div>
-        <div class="fdot"></div>
-        <div class="fdot"></div>
+  <section class="fade fade-5">
+    <h2 class="form-heading">Express interest.</h2>
+    <p class="form-sub">Fill in the form and we'll be in touch.</p>
+
+    <form id="designerForm">
+
+      <div class="field-group">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="name" placeholder="Your full name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label>Phone / WhatsApp <span class="req">*</span></label>
+          <input type="tel" name="phone" placeholder="+234 800 000 0000" autocomplete="tel" inputmode="tel" required />
+        </div>
       </div>
+
+      <div class="field-group full">
+        <div class="field">
+          <label>Portfolio Link <span class="req">*</span></label>
+          <input type="url" name="portfolio" placeholder="https://behance.net/yourname" inputmode="url" autocomplete="url" required />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field">
+          <label>Design Specialty <span class="req">*</span></label>
+          <select name="specialty" required>
+            <option value="" disabled selected>Select specialty</option>
+            <option value="Brand & Visual Identity">Brand &amp; Visual Identity</option>
+            <option value="Motion & Video Design">Motion &amp; Video Design</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Years of Experience <span class="req">*</span></label>
+          <select name="experience" required>
+            <option value="" disabled selected>Select range</option>
+            <option value="Less than 1 year">Less than 1 year</option>
+            <option value="1–2 years">1–2 years</option>
+            <option value="3–5 years">3–5 years</option>
+            <option value="5+ years">5+ years</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Software Tools Used</label>
+        <div class="checkbox-grid" id="toolsGrid">
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Adobe Photoshop"> <span>Photoshop</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Adobe Illustrator"> <span>Illustrator</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="After Effects"> <span>After Effects</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Figma"> <span>Figma</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Premiere Pro"> <span>Premiere Pro</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Canva"> <span>Canva</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="DaVinci Resolve"> <span>DaVinci</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="Blender"> <span>Blender</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="CorelDRAW"> <span>CorelDRAW</span></label>
+          <label class="checkbox-item" onclick="toggleCheck(this)"><input type="checkbox" name="tools" value="CapCut"> <span>CapCut</span></label>
+        </div>
+      </div>
+
+      <div class="status" id="statusMsg"></div>
+
+    </form>
+  </section>
+
+  <footer class="site-footer fade fade-6">
+    <p class="footer-text"><strong>IEEE UNIBEN</strong> · University of Benin, Benin City</p>
+    <div class="footer-dots">
+      <div class="fdot on"></div><div class="fdot"></div><div class="fdot"></div>
     </div>
-  </div>
+  </footer>
+
 </div>
+
+<!-- Sticky submit (fixed on mobile, inline on desktop) -->
+<div class="sticky-cta">
+  <p class="sticky-note">Your info goes directly to the IEEE UNIBEN team. No spam, ever.</p>
+  <button type="submit" form="designerForm" id="submitBtn">Apply →</button>
+</div>
+
+<script>
+  const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+
+  function toggleCheck(label) {
+    const cb = label.querySelector('input[type="checkbox"]');
+    if (!cb) return;
+    setTimeout(() => label.classList.toggle('checked', cb.checked), 0);
+  }
+
+  document.getElementById('designerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn    = document.getElementById('submitBtn');
+    const status = document.getElementById('statusMsg');
+
+    const tools = [...document.querySelectorAll('input[name="tools"]:checked')]
+      .map(cb => cb.value).join(', ') || 'None selected';
+
+    const data = {
+      name:       this.name.value.trim(),
+      phone:      this.phone.value.trim(),
+      portfolio:  this.portfolio.value.trim(),
+      specialty:  this.specialty.value,
+      experience: this.experience.value,
+      tools,
+      submitted:  new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.className = 'status';
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      status.className = 'status success';
+      status.innerHTML = '&#10003; Application received! Redirecting you to the IEEE UNIBEN Designers WhatsApp group&hellip;';
+      this.reset();
+      document.querySelectorAll('.checkbox-item').forEach(el => el.classList.remove('checked'));
+      btn.textContent = 'Sent ✓';
+
+      setTimeout(() => {
+        window.location.href = 'https://chat.whatsapp.com/BA3vvzVUQ2e5GKAdDf2yuI?mode=gi_t';
+      }, 2000);
+
+    } catch (err) {
+      status.className = 'status error';
+      status.textContent = '✗ Something went wrong. Please try again or reach out directly.';
+      btn.disabled = false;
+      btn.textContent = 'Apply →';
+    }
+  });
+</script>
+
 </body>
 </html>
