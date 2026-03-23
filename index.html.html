@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call for Designers — IEEE UNIBEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a12;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .flyer {
+    width: 680px;
+    min-height: 960px;
+    background: #0d0d1a;
+    border: 1px solid #1e2040;
+    position: relative;
+    overflow: hidden;
+    padding: 56px 52px 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Circuit grid background */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 98, 155, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 98, 155, 0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+  }
+
+  /* Corner accent blobs */
+  .blob-tl {
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(0, 98, 155, 0.25) 0%, transparent 70%);
+    z-index: 0;
+  }
+
+  .blob-br {
+    position: absolute;
+    bottom: -100px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 165, 0, 0.12) 0%, transparent 65%);
+    z-index: 0;
+  }
+
+  /* Decorative horizontal rule */
+  .rule-accent {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #00629B 0%, rgba(0,98,155,0.1) 100%);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Content */
+  .content { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .ieee-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ieee-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00629B;
+  }
+
+  .ieee-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #00629B;
+  }
+
+  .year-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.25);
+    font-weight: 400;
+  }
+
+  /* Tag */
+  .tag-line {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,165,0,0.7);
+    margin-bottom: 18px;
+  }
+
+  /* Headline */
+  .headline {
+    font-family: 'Syne', sans-serif;
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 1.0;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .headline span {
+    color: #00629B;
+  }
+
+  .subheadline {
+    font-family: 'Syne', sans-serif;
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 1.0;
+    color: rgba(255,255,255,0.12);
+    margin-bottom: 36px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Divider */
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: #00629B;
+    margin-bottom: 28px;
+  }
+
+  /* Body copy */
+  .body-copy {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .body-copy strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  /* Roles */
+  .roles-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 14px;
+  }
+
+  .roles {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .role-pill {
+    padding: 9px 20px;
+    border: 1px solid rgba(0, 98, 155, 0.5);
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.02em;
+    background: rgba(0, 98, 155, 0.08);
+  }
+
+  .role-pill.accent {
+    border-color: rgba(255, 165, 0, 0.4);
+    background: rgba(255, 165, 0, 0.07);
+    color: rgba(255, 200, 80, 0.85);
+  }
+
+  /* What you gain */
+  .gains {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 52px;
+  }
+
+  .gain-item {
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+
+  .gain-icon {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .gain-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 4px;
+  }
+
+  .gain-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-row {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .cta-block { }
+
+  .cta-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    margin-bottom: 8px;
+  }
+
+  .cta-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .cta-detail {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+  }
+
+  .cta-button {
+    padding: 14px 32px;
+    background: #00629B;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-brand strong {
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  .footer-dot-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .fdot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(0,98,155,0.5);
+  }
+
+  .fdot.active { background: #00629B; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .flyer { border: none; }
+  }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="grid-bg"></div>
+  <div class="blob-tl"></div>
+  <div class="blob-br"></div>
+
+  <div class="content">
+    <!-- Header -->
+    <div class="header">
+      <div class="ieee-badge">
+        <div class="ieee-dot"></div>
+        <span class="ieee-label">IEEE University of Benin Student Branch</span>
+      </div>
+      <span class="year-tag">2026</span>
+    </div>
+
+    <!-- Tag -->
+    <p class="tag-line">Open Creative Collaboration</p>
+
+    <!-- Headline -->
+    <h1 class="headline">We're calling<br>for <span>designers.</span></h1>
+    <h2 class="subheadline">Are you one?</h2>
+
+    <div class="divider"></div>
+
+    <!-- Body -->
+    <p class="body-copy">
+      IEEE UNIBEN is looking for <strong>brand & visual identity designers</strong> and
+      <strong>motion & video designers</strong> to collaborate with one of the University of Benin's
+      most active engineering communities. No rigid contracts — just your craft, applied to
+      work that reaches real people.
+    </p>
+
+    <!-- Roles -->
+    <p class="roles-label">We're looking for</p>
+    <div class="roles">
+      <div class="role-pill">Brand &amp; Visual Identity</div>
+      <div class="role-pill accent">Motion &amp; Video Design</div>
+    </div>
+
+    <!-- Gains -->
+    <div class="gains">
+      <div class="gain-item">
+        <div class="gain-icon">◈</div>
+        <p class="gain-title">Real Portfolio Work</p>
+        <p class="gain-desc">Projects with purpose and an audience that extends beyond the campus.</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">◉</div>
+        <p class="gain-title">Full Credit &amp; Visibility</p>
+        <p class="gain-desc">Your name and work featured across IEEE UNIBEN's official platforms.</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">◎</div>
+        <p class="gain-title">Engineering Network</p>
+        <p class="gain-desc">Connect with engineers, tech leaders, and innovators across the branch.</p>
+      </div>
+      <div class="gain-item">
+        <div class="gain-icon">◇</div>
+        <p class="gain-title">Flexible Collaboration</p>
+        <p class="gain-desc">Contribute on your own terms — remote-friendly, no rigid commitments.</p>
+      </div>
+    </div>
+
+    <!-- CTA Row -->
+    <div class="cta-row">
+      <div class="cta-block">
+        <p class="cta-label">Reach us</p>
+        <p class="cta-text">Slide in. Let's build.</p>
+        <p class="cta-detail">[your contact / DM / email here]</p>
+      </div>
+      <div class="cta-button">Apply / Connect →</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-brand"><strong>IEEE UNIBEN</strong> · University of Benin, Benin City</p>
+      <div class="footer-dot-row">
+        <div class="fdot active"></div>
+        <div class="fdot"></div>
+        <div class="fdot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
